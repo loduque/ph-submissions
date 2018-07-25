@@ -27,54 +27,55 @@ difficulty: 2
 
 ## Objetivos de la lección
 
-En esta lección aprenderá cómo georrefereciar mapas históricos para que puedan añadirse a un SIG (Sistema de Información Geográfica) como una capa ráster. Georreferenciar es requerido para cualquier persona que quiera digitalizar con precisión datos encontrados en un mapa de papel, y como los historiadores trabajan sobre el todo en el reino del papel, georreferenciar es una de las herramientas que más utilizamos. La técnica utiliza una serie de puntos de control para darle a un objetos de dos dimensiones como un mapa de papel las coordenadas reales que necesita para alinearse con las características tridimensionales de la tierra en el software SIG (en [Intro to Google Maps and Google Earth][] vemos un 'overlay' que en Google Earth es una especie de una versión atajo de la georreferenciación).
-Georreferenciar un mapa histórico requiere un conocimiento de la geografía e historia del lugar que estás estudiando para así asegurar precisión. Los paisajes construidos y naturales cambian a través del tiempo y es importante confirmar si la ubicación de tus puntos de control--sean casas, intersecciones o pueblos--se han matenido constantes. Introducir puntos de control en un SIG es fácil, pero detrás de bambalinas, la georreferenciación utiliza procesos complejos de transformación y compresión. Estos se utilizan para corregir las distorsiones e inexactitudes que se encuentran en muchos mapas históricos y estirar los mapas para que quepan dentro de coordenadas geográficas. En cartografía esto se conoce como *[rubber-sheeting][]* porque se trata al mapa como si estuviera hecho de caucho (*rubber* en inglés) y a los puntos de control como si fueran tachuelas "clavando" el documento histórico en una superficie tridimensional como el globo terránqueo.       
+En esta lección aprenderás cómo georreferenciar mapas históricos para que puedan añadirse a un SIG (Sistema de Información Geográfica) como una capa ráster. La georreferenciación es una herramienta necesaria para digitalizar los datos que se encuentran en los mapas de papel. Además, como los historiadores trabajamos sobre todo en un reino de papel, la georreferenciación es una de las herramientas que más utilizamos. La técnica consiste en utilizar una serie de puntos de control para vincular a objetos bidimensionales, como un mapa en papel, las coordenadas reales necesaria para que se realice la alineación con las características tridimensionales de la tierra en un programa SIG (en [Intro to Google Maps and Google Earth][] vemos un 'overlay', que es una especie de atajo para la georreferenciación en Google Earth). 
 
-Para ofrecer algunos ejemplos de mapas históricos georreferenciados, hemos preparado algunos mapas de la National Topographic Series que se encuentran en el sitio web de la biblioteca de la Universidad de Toronto, cortesía de Marcel Fortin, y los hemos superpuesto en un mapa web de Google. Se les puede ajustar la transparencia con la barra deslizante en la esquina superior derecha, ver el mapa histórico superpuesto en imágenes de terreno o satelitales, o hacer clic en 'Earth' para cambiar al modo Earth y ver las elevaciones y edificios modernos en 3D (en Halifax y Darthmouth).   
-Nota: estos mapas históricos son grandes y van a aparecer en a pantalla lentamente, especialmente cuando acercas la imagen en el mapa de Google.
+Georreferenciar un mapa histórico requiere un conocimiento de la geografía e historia del lugar que estás estudiando para así asegurar precisión. Los paisajes construidos y naturales se transforman con el tiempo, por lo cual es importante verificar si la localización de los puntos de control --sean casas, intersecciones o pueblos-- se ha mantenido constante. Introducir puntos de control en un SIG es fácil, pero detrás de bambalinas, la georreferenciación utiliza procesos complejos de transformación y compresión. Estos se utilizan para corregir las distorsiones e inexactitudes que se encuentran en muchos mapas históricos y estirarlos para que quepan dentro de coordenadas geográficas. En cartografía esto se conoce como *[rubber-sheeting][]* porque se trata al mapa como si estuviera hecho de caucho (*rubber* en inglés) y a los puntos de control como si fueran tachuelas "clavando" el documento histórico en una superficie tridimensional como el globo terránqueo.       
+
+Para ofrecer algunos ejemplos de mapas históricos georreferenciados, hemos preparado algunos mapas de la National Topographic Series que se encuentran en el sitio web de la biblioteca de la Universidad de Toronto, cortesía de Marcel Fortin, y los hemos superpuesto en un mapa web de Google. Se puede ajustar la transparencia con la barra deslizante en la esquina superior derecha para ver el mapa histórico superpuesto en imágenes de terreno o satelitales, o hacer clic en 'Earth' para cambiar al modo Earth y ver las elevaciones y edificios modernos en 3D (en Halifax y Darthmouth).   
+Nota: estos mapas históricos son grandes y van a aparecer lentamente en la pantalla, especialmente cuando acerques la imagen en el mapa de Google.
 
 
--   [National Topographic System Maps][] – Halifax, 1920s
+-   [National Topographic System Maps][] – Halifax, década de 1920
 -   [National Topographic System Maps][1] – Western PEI, 1939-1944
--   [National Topographic System Maps][2] – Eastern PEI 1939-1944
+-   [National Topographic System Maps][2] – Eastern PEI, 1939-1944
 
 ## Para empezar
 
-Antes de empezar a georreferenciar en Quantun GIS, necesitamos activar unos *plugins*. En la barra de herramientas vaya a "Plugins" -\>Manage and Install Plugins
+Antes de empezar a georreferenciar en Quantum GIS, necesitamos activar unos *Complementos*. En la barra de herramientas vaya a *"Complementos -\>Administrar e instalar complementos"*
 
 {% include figure.html filename="geo110.png" caption="Figura 1" %}
 
-Una ventana llamada "Plugin Manager" se abrirá. Desplázate hacia abajo hasta "Georeference GDAL" y activa la casilla que está a su lado y haz clic en OK.
+Se abrirá un cuadro de diálogo llamado *Administrador de complementos*. Desplázate hasta *"Georreferenciador GDAL"* y activa la casilla que está a su lado y haz clic en OK.
 
 {% include figure.html filename="geo210.png" caption="Figura 2" %}
 
--   En este momento necesita cerrar y volver a abrir QGIS. Para el propósito de este ejemplo, y para mantener las cosas lo más simple posible, no vuelva a cargar su proyecto sino que mejor comience un nuevo projecto.
--   Configure el *[Coordinate Reference System][]* (CRS) correctamente (ver [Installing QGIS 2.0 and adding Layers][] para recordar como hacerlo)
--   Guarde este nuevo proyecto (en el menú de *File*, selecciona *"Save Project"*) y nómbrelo 'georreferenciar.'
+-   En este momento necesitas cerrar y volver a abrir QGIS. Para el propósito de este ejemplo y mantener las cosas lo más simple posible, no cargues de nuevo tu proyecto. Comienza uno diferente.
+-   Configura el *[Sistema de Referencia de Coordenadas][]* (SRC) correctamente (ver [Installing QGIS 2.0 and adding Layers][] para recordar cómo hacerlo).
+-   Guarda este nuevo proyecto (en el menú *Proyecto*, selecciona *"Guardar"*) y nómbralo 'georreferenciar.'
 -   Añade la capa *'coastline\_polygon'* (ver [Installing QGIS 2.0 and
-    adding Layers][] para recordar como)
+    adding Layers][] para recordar cómo).
 
-## Abre las capas de GIS necesarias 
+## Abre las capas de SIG necesarias 
 
-Para el estudio de caso de la isla del príncipe Edward (PEI), vamos a usar las fronteras de la municipilalidad como puntos de control debido a que estas fronteras fueron establecidas en 1764 por Samuel Holland, están identificadas en la mayoría de los mapas de PEI y han cambiado muy poco desde que fueron creadas. 
+Para el estudio de caso de la Isla del Príncipe Eduardo (conocida por sus siglas en inglés como PEI), usaremos las fronteras de la municipalidad como puntos de control debido a que estas fronteras se establecieron en 1764 por Samuel Holland, están identificadas en la mayoría de los mapas de PEI y han cambiado muy poco desde que fueron creadas. 
 
 *Descargar lot\_township\_polygon:*
 
-Este es el shapefile (entidades vectoriales) que contiene la capa de vectores indicando las divisiones municipales modernas que usaremos para georrefereciar el mapa histórico.  Note que las municipalidades no tenían nombres en 1764, sin embargo, tenían números asignados a cada lote, razón por la cual son referidos como "Lots" en PEI. De ahi que el archivo se llame 'lot\_township\_polygon'.
+Este es el shapefile (archivo de entidades vectoriales) que contiene la capa de vectores actuales que usaremos para georreferenciar el mapa histórico.  Nótese que las municipalidades no tenían nombres en 1764, sin embargo, tenían números asignados a cada lote, razón por la cual son referidos como "Lots" en PEI. De ahí que el archivo se llame 'lot\_township\_polygon'.
 
--   Navegue al siguiente enlace, acepte la licencia de uso y descargue 'lot\_township\_polygon'  (Le preguntarán su nombre y correo electrónico antes de poder descargar el archivo).
+-   Navegua al siguiente enlace, acepta la licencia de uso y descargua 'lot\_township\_polygon'  (En algunas ocasiones te preguntarán tu nombre y correo electrónico antes de poder descargar el archivo).
 
 <http://www.gov.pe.ca/gis/license_agreement.php3?name=lot_town&file_format=SHP>
     
--  Después de descargar el archivo llamado 'lot \ _township \ _polygon', muévalo a una carpeta que pueda encontrar más adelante y descomprima el archivo. (Recuerde mantener los archivos juntos ya que todos son necesarios para abrir esta capa en su SIG)
+-  Después de descargar el archivo llamado 'lot \ _township \ _polygon', muévelo a una carpeta que puedas encontrar después y descomprime el archivo. (Recuerda mantener los archivos juntos ya que todos son necesarios para abrir esta capa en tu SIG)
 
 {% include figure.html filename="geo310.png" caption="Figure 3" %}
 
 *Añadir lot\_township\_polygon to QGIS:*
 
--   En la barra de herramientas vaya a "Layer", escoja "Add Vector Layer" (alternativamente, el mismo ícono que ve al lado de "Add Vector Layer" también se puede seleccionar desde la barra de herramientas)
--   Haga clic en "Browse". Navegue a su archivo descomprimido y seleccione el archivo 'lot \ _township \ _polygon.shp'
--   Haga clic en "Open"
+-   En la barra de herramientas ve a *"Capa"*, escoje *"Añadir capa vectorial"* (alternativamente, el mismo ícono que se ve al lado de *"Añadir capa vectorial"* también se puede seleccionar desde la barra de herramientas).
+-   Haz clic en *"Explorar"*. Navegua a tu archivo descomprimido y selecciona el archivo 'lot \ _township \ _polygon.shp'
+-   Haz clic en *"Abrir"*
   
 {% include figure.html filename="geo41.png" caption="Figure 4" %}
 
