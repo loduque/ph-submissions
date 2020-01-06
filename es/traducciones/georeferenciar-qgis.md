@@ -120,7 +120,7 @@ Planifica previamente los lugares que vas a utilizar como puntos de control ante
 
 **Primero**, navega a la ubicación de tu primer punto de control en el **mapa histórico**.
 
--  Haz clic en "Acercar zum" en la barra de herramientas o magnifica el punto con la rueda del mouse.
+-  Haz clic en "Acercar Zoom" en la barra de herramientas o magnifica el punto con la rueda del mouse.
 
 {% include figure.html filename="geo91.png" caption="Figure 9" %}
 
@@ -200,17 +200,17 @@ En procesos más avanzados, puedes incluso cubrir esta imagen georreferenciada c
 
 *Este tutorial es parte de [Geospatial Historian][].*
 
-  [Intro to Google Maps and Google Earth]: ../lessons/googlemaps-googleearth
+  [Intro to Google Maps and Google Earth]: https://programminghistorian.org/en/lessons/googlemaps-googleearth
   [rubber-sheeting]: http://en.wikipedia.org/wiki/Rubbersheeting
   [National Topographic System Maps]: http://maps.library.utoronto.ca/datapub/digital/3400s_63_1929/maptile/Halifax/googlemaps.html
   [1]: http://maps.library.utoronto.ca/datapub/PEI/NTS/west/
   [2]: http://maps.library.utoronto.ca/datapub/PEI/NTS/east/
   [Coordinate Reference System]: http://en.wikipedia.org/wiki/Spatial_reference_system
-  [Installing QGIS 2.0 and adding Layers]: ../lessons/qgis-layers
+  [Installing QGIS 2.0 and adding Layers]: https://programminghistorian.org/en/lessons/qgis-layers
   [can be downloaded here]: http://geospatialhistorian.files.wordpress.com/2013/02/pei_lakemap1863.jpg
   [Island Imagined]: http://www.islandimagined.ca/fedora/repository/imagined%3A208687
   [in Atlantic Canada]: http://books.google.ca/books?id=TqCNZYXWXAUC&dq=tilting&source=gbs_navlinks_s
   [world file]: http://en.wikipedia.org/wiki/World_file
   [Tif]: http://en.wikipedia.org/wiki/Tagged_Image_File_Format
-  [Creating New Vector Layers in QGIS]: ../lessons/vector-layers-qgis
+  [Creating New Vector Layers in QGIS]: https://programminghistorian.org/en/lessons/vector-layers-qgis
   [Geospatial Historian]: http://geospatialhistorian.wordpress.com/
